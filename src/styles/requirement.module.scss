@@ -1,0 +1,18 @@
+.hint {
+  display: flex;
+  flex-direction: column;
+}
+
+.hint p {
+  font-size: 0.8rem;
+  color: #BABFD1;
+  margin: 0.5rem 0 0;
+}
+
+.hint .checked {
+  color: #2D936C;
+}
+
+.hint .warning {
+  color: red;
+}

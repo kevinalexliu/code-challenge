@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.6);
+  font-family: 'Roboto', sans-serif;
 }
 
 .form {
@@ -13,4 +14,29 @@
   padding: 16px;
   border-radius: 16px;
   background: #fff;
+}
+
+.form .logo {
+  display: flex;
+  justify-content: center;
+}
+
+.form h1 {
+  text-align: center;
+}
+
+.btn {
+  width: 100%;
+  height: 3em;
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  background-color: #4840BB;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background-color: #4840bbe1;
 }

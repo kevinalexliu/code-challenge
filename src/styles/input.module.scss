@@ -1,0 +1,44 @@
+.Username, .Password {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.Username input,
+.Password input {
+  padding: 0.9rem 1rem 0 0.7rem;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid grey;
+  box-sizing: border-box;
+}
+
+.Username label,
+.Password label {
+  font-size: 1rem;
+  position: absolute;
+  transform: translate(0, 1.5rem) scale(1);
+  color: #9DA2AB;
+  transform-origin: top left;
+  transition: all 0.2s ease-out;
+}
+
+.Username .active,
+.Password .active {
+  transform: translate(0, 0.2rem) scale(0.75);
+}
+
+.Username:focus-within label,
+.Password:focus-within label {
+  transform: translate(0, 0.2rem) scale(0.75);
+  color: #4840BB;
+}
+
+.Username:focus-within input,
+.Password:focus-within input {
+  border-bottom: 2px solid #4840BB;
+}
