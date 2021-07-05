@@ -29,7 +29,7 @@ describe('/api/create_new_account', () => {
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toEqual({
       result: false,
-      errors: {username: 'Username is not valid'}
+      errors: {message: 'Username is not valid'}
     });
   });
 
@@ -45,7 +45,7 @@ describe('/api/create_new_account', () => {
     expect(res._getStatusCode()).toBe(400);
     expect(res._getJSONData()).toEqual({
       result: false,
-      errors: {password: 'Password is not valid'}
+      errors: {message: 'Password is not valid'}
     })
   })
 });
