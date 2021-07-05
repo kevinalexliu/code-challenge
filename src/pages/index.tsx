@@ -16,18 +16,20 @@ const account : Account= {username: '', password: ''}
 
 export default function CreateAccount() {
   const [haveInput, setHaveInput] = useState(true);
+  const [warning, setWarning] = useState('')
 
   async function handleSubmit(evt: FormEvent) {
     evt.preventDefault();
-    if (account.username && account.password) {
-      const response = await fetch('/api/create_new_account', {
-        method: 'POST',
-        body: JSON.stringify(account),
-      });
-      console.log(await response.json());
-    } else {
+    const response = await fetch('/api/create_new_account', {
+      method: 'POST',
+      body: JSON.stringify(account),
+    });
+    const res = await response.json();
+    if (!res.result) {
+      setWarning(res.errors.message);
       setHaveInput(false);
     }
+    console.log(res)
   }
 
   const handleUsername = (username : string) => {
@@ -54,7 +56,7 @@ export default function CreateAccount() {
           <h1>Create New Account</h1>
           <Input label="Username" handleUsername={handleUsername}/>
           <Input label="Password" handlePassword={handlePassword}/>
-          {!haveInput ? <p className={styles.warning}>Please enter your username and password</p> : undefined}
+          {!haveInput ? <p className={styles.warning}>{warning}</p> : undefined}
           <button className={styles.btn} onClick={handleSubmit}>Create Account</button>
         </form>
       </article>

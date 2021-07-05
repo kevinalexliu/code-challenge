@@ -32,7 +32,7 @@ const Input = ({label, handleUsername, handlePassword}: Props) => {
   const [exposed, setExposed] = useState(false);
 
   const isExposed = async () => {
-    if (label === 'Password' && hint.symbol && hint.number && hint.character && hint.count) {
+    if (label === 'Password') {
       const res = await fetch('api/password_exposed', {
         method: 'POST',
         body: JSON.stringify({password: value})
