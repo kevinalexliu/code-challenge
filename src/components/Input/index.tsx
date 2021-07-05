@@ -3,7 +3,9 @@ import Requirement from '../Requirement';
 import styles from '../../styles/input.module.scss';
 
 interface Props {
-  label: string
+  label: string,
+  handleUsername?: Function,
+  handlePassword?: Function
 }
 
 interface Hint {
@@ -24,20 +26,19 @@ const hint: Hint = {
   count: false
 }
 
-const Input = ({label}: Props) => {
+const Input = ({label, handleUsername, handlePassword}: Props) => {
   const [value, setValue] = useState('');
   const [active, setActive] = useState(false);
   const [exposed, setExposed] = useState(false);
 
-  const isExposed = async (evt: FocusEvent<HTMLInputElement>) => {
-    evt.preventDefault();
-    if (label === 'Password') {
-      console.log('test')
+  const isExposed = async () => {
+    if (label === 'Password' && hint.symbol && hint.number && hint.character && hint.count) {
       const res = await fetch('api/password_exposed', {
         method: 'POST',
         body: JSON.stringify({password: value})
       })
-      return setExposed(await res.json());
+      const exposed = await res.json();
+      setExposed(exposed.result);
     }
   }
 
@@ -92,13 +93,20 @@ const Input = ({label}: Props) => {
     validateNum();
     validateChar();
     validateSymbol();
+    if (hint.symbol && hint.count && hint.number && hint.character) {
+      if (label === 'Password') {
+        handlePassword(value);
+      } else {
+        handleUsername(value);
+      }
+    }
   },[value])
 
   return (
     <div className={styles[label]}>
       <label className={active ? styles.active : undefined}>{label}</label>
-      <input type="text" name={label} value={value} onChange={handleInput}></input>
-      <Requirement label={label} hint={hint}  onBlur={(evt) => isExposed(evt)} exposed={exposed}/>
+      <input type="text" name={label} value={value} onChange={handleInput} onBlur={isExposed}></input>
+      <Requirement label={label} hint={hint} exposed={exposed}/>
     </div>
   )
 }
